@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izylions Fashion</title>
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">IZYLIONS</div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#">Categories ▼</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Men's Apparel</a></li>
+                    <li><a href="#">Women's Apparel</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="#" id="wishlist-btn">Wishlist</a></li>
+            <li><a href="#" id="cart-btn">Cart (0)</a></li>
+            <li><a href="#" id="login-btn">Login / Register</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero-scroll-container">
+        <div class="fashion-item" id="hero-image">
+            <img src="https://via.placeholder.com/800x1000" alt="Izylions Fashion">
+        </div>
+        <div class="hero-text">
+            <h1>Define Your Style</h1>
+            <button id="add-to-cart-hero">Add to Cart</button>
+        </div>
+    </section>
+
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/cart.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
