@@ -1,0 +1,156 @@
+/* ================================================
+   css/hero.css  — feature/ui-base
+   Scroll-zoom hero section with sticky pinning,
+   ambient orbs, and animated text reveal
+   ================================================ */
+
+/* ---------- Scroll-pinned Hero ---------- */
+.hero-scroll-section {
+  position: relative;
+  height: 280vh;          /* tall = more scroll room */
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Zoom Wrapper (scaled by JS) ---------- */
+.hero-zoom-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 60%, #0d1b2a 0%, #000 65%);
+}
+
+/* ---------- Content ---------- */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  animation: heroFadeUp 1.2s var(--ease-smooth) both;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5ac8fa;
+  margin-bottom: 20px;
+  animation: heroFadeUp 1.2s 0.1s var(--ease-smooth) both;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-1);
+  margin-bottom: 24px;
+  animation: heroFadeUp 1.2s 0.2s var(--ease-smooth) both;
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-2);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+  animation: heroFadeUp 1.2s 0.35s var(--ease-smooth) both;
+}
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: heroFadeUp 1.2s 0.5s var(--ease-smooth) both;
+}
+
+/* ---------- Ambient Orbs ---------- */
+.hero-bg-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,113,227,0.2) 0%, transparent 70%);
+  top: -150px; left: -100px;
+  animation: orbDrift1 18s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(83,52,131,0.18) 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation: orbDrift2 22s ease-in-out infinite alternate;
+}
+.orb-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(90,200,250,0.1) 0%, transparent 70%);
+  top: 30%; left: 55%;
+  animation: orbDrift3 16s ease-in-out infinite alternate;
+}
+@keyframes orbDrift1 { to { transform: translate(80px, 60px); } }
+@keyframes orbDrift2 { to { transform: translate(-60px, -80px); } }
+@keyframes orbDrift3 { to { transform: translate(-40px, 50px); } }
+
+/* ---------- Scroll progress indicator ---------- */
+.scroll-indicator {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 0.4s;
+  animation: heroFadeUp 1.2s 0.8s var(--ease-smooth) both;
+}
+.scroll-indicator.hidden { opacity: 0; }
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-indicator span {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(0.6) translateY(-8px); }
+  50%       { opacity: 1;   transform: scaleY(1)   translateY(0); }
+}
+
+/* ---------- Featured section ---------- */
+.featured-section {
+  padding: 80px 0 60px;
+}
