@@ -161,9 +161,10 @@ window.STORE = {
   },
 
   formatPrice(price) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-MY', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'MYR',
+      currencyDisplay: 'narrowSymbol',
       minimumFractionDigits: 0
     }).format(price);
   }
