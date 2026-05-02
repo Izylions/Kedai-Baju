@@ -1,57 +1,70 @@
 /* ================================================
-   js/scroll-zoom.js  — feature/ui-base
-   Apple-style scroll-driven zoom for hero section.
-   Pins hero, scales content as user scrolls.
+   js/scroll-zoom.js  — feature/ui-base (Now Slideshow)
+   Handles the hero slideshow functionality
    ================================================ */
 
 window.SCROLL_ZOOM = (() => {
 
   function init() {
-    const section  = document.getElementById('heroSection');
-    const zoomWrap = document.getElementById('heroZoom');
-    if (!section || !zoomWrap) return;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('slidePrev');
+    const nextBtn = document.getElementById('slideNext');
+    
+    if (!slides.length) return;
 
-    let ticking = false;
+    let currentSlide = 0;
+    let slideInterval;
 
-    function update() {
-      const rect = section.getBoundingClientRect();
-      const sectionH = section.offsetHeight;
-      const viewH    = window.innerHeight;
-
-      /* scrolled distance into the section (0 → sectionH - viewH) */
-      const scrolled = -rect.top;
-      const maxScroll = sectionH - viewH;
-      const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
-
-      /* Scale: 1.0 → 1.18 as user scrolls through */
-      const scale = 1 + progress * 0.18;
-
-      /* Fade out text when zoomed past 70% */
-      const contentOpacity = progress < 0.6 ? 1 : Math.max(0, 1 - (progress - 0.6) / 0.4);
-
-      zoomWrap.style.transform = `scale(${scale})`;
-
-      const content = zoomWrap.querySelector('.hero-content');
-      if (content) content.style.opacity = contentOpacity;
-
-      /* Hide scroll indicator after 10% scroll */
-      const indicator = section.querySelector('.scroll-indicator');
-      if (indicator) indicator.classList.toggle('hidden', progress > 0.08);
-
-      ticking = false;
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = (index + slides.length) % slides.length;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
     }
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
 
-    update(); // initial
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    function startSlideshow() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetSlideshow() {
+      clearInterval(slideInterval);
+      startSlideshow();
+    }
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetSlideshow();
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetSlideshow();
+      });
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.getAttribute('data-index')));
+        resetSlideshow();
+      });
+    });
+
+    startSlideshow();
   }
 
-  /* ---- Scroll-triggered product card reveal ---- */
   function initCardReveal() {
     const cards = document.querySelectorAll('.product-card, .cat-card, .promo-banner');
     if (!cards.length) return;

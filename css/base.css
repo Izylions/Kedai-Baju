@@ -16,9 +16,9 @@
   --text-1:     #f5f5f7;
   --text-2:     #a1a1a6;
   --text-3:     #6e6e73;
-  --accent:     #ffffff;
-  --accent-2:   #0071e3;
-  --accent-glow: rgba(0,113,227,0.35);
+  --accent:     #ff3366;
+  --accent-2:   #5ac8fa;
+  --accent-glow: rgba(255,51,102,0.35);
   --radius-sm:  8px;
   --radius-md:  14px;
   --radius-lg:  20px;
@@ -195,12 +195,12 @@ p  { color: var(--text-2); }
 }
 .cat-card:hover { transform: translateY(-4px); border-color: var(--border-md); }
 .cat-card:hover::before { opacity: 1; }
-.cat-mac    { background: linear-gradient(135deg, #1c1c1e, #2c2c2e); }
-.cat-iphone { background: linear-gradient(135deg, #0a1628, #0d2044); }
-.cat-audio  { background: linear-gradient(135deg, #1a0a1e, #2d1444); }
-.cat-acc    { background: linear-gradient(135deg, #0a1a0a, #112211); }
-.cat-label  { font-family: var(--font-display); font-size: 1.8rem; color: var(--text-1); }
-.cat-cta    { font-size: 14px; color: var(--accent-2); margin-top: 8px; }
+.cat-mac    { background: linear-gradient(135deg, #2a0845, #6441A5); } /* Tops */
+.cat-iphone { background: linear-gradient(135deg, #114357, #F29492); } /* Bottoms */
+.cat-audio  { background: linear-gradient(135deg, #ff4b1f, #ff9068); } /* Outerwear */
+.cat-acc    { background: linear-gradient(135deg, #1D976C, #93F9B9); } /* Dresses */
+.cat-label  { font-family: var(--font-display); font-size: 1.8rem; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.cat-cta    { font-size: 14px; color: #fff; margin-top: 8px; font-weight: 500; }
 
 /* ---------- Footer ---------- */
 .site-footer {
