@@ -36,5 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
     `);
   }
 
-  console.log('%cLumaStore booted ✓', 'color:#30d158;font-weight:bold;font-size:14px');
+  console.log('%cIzylions Store booted ✓', 'color:#30d158;font-weight:bold;font-size:14px');
 });

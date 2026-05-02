@@ -1,6 +1,6 @@
 # Kedai-Baju
 
-# ◈ LumaStore — Apple-style E-Commerce
+# ◈ Izylions Store — Apple-style E-Commerce
 
 A sleek, Apple.com-inspired e-commerce site with scroll-zoom hero, dropdown nav, user auth, cart, and wishlist.
 
