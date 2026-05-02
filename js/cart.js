@@ -86,7 +86,7 @@ window.CART = (() => {
           </svg>
           <p>Your cart is empty</p>
         </div>`;
-      if (totalEl) totalEl.textContent = '$0';
+      if (totalEl) totalEl.textContent = 'RM 0';
       return;
     }
 
