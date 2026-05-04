@@ -18,7 +18,7 @@ window.PRODUCTS = (() => {
       <div class="product-card" data-product-id="${product.id}">
         <div class="product-img-wrap">
           ${badge}
-          <div class="product-img-placeholder">${product.emoji}</div>
+          <img src="${product.image}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover; display:block;">
           <button class="card-wishlist-btn ${isWishlisted ? 'wishlisted' : ''}"
                   data-wishlist-btn="${product.id}"
                   title="${isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}">

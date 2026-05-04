@@ -96,7 +96,7 @@ window.CART = (() => {
       const el = document.createElement('div');
       el.className = 'cart-item';
       el.innerHTML = `
-        <div class="cart-item-img">${p.emoji}</div>
+        <div class="cart-item-img"><img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="cart-item-info">
           <div class="cart-item-name">${p.name}</div>
           <div class="cart-item-price">${window.STORE.formatPrice(p.price)}</div>

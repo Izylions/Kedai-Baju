@@ -28,6 +28,20 @@ window.NAVBAR = (() => {
     }
 
     /* ---- Search overlay ---- */
+    if (!document.getElementById('searchOverlay')) {
+      const el = document.createElement('div');
+      el.className = 'search-overlay';
+      el.id = 'searchOverlay';
+      el.innerHTML = `
+        <div class="search-input-wrap">
+          <input type="text" id="searchInput" placeholder="Search products…" autocomplete="off"/>
+          <button class="search-close-btn" id="searchCloseBtn">✕</button>
+        </div>
+        <div class="search-results" id="searchResultsContainer"></div>
+      `;
+      document.body.appendChild(el);
+    }
+
     const searchBtn     = document.getElementById('searchBtn');
     const searchOverlay = document.getElementById('searchOverlay');
     const searchClose   = document.getElementById('searchCloseBtn');
@@ -57,9 +71,9 @@ window.NAVBAR = (() => {
                 display:flex;gap:14px;align-items:center;
                 padding:12px;border-radius:10px;cursor:pointer;
                 transition:background .15s;
-              " onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+              " onmouseover="this.style.background='rgba(0,0,0,0.04)'"
                  onmouseout="this.style.background=''">
-                <span style="font-size:2rem">${p.emoji}</span>
+                <img src="${p.image}" alt="${p.name}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--border)">
                 <div>
                   <div style="font-size:15px;color:var(--text-1);font-weight:500">${p.name}</div>
                   <div style="font-size:13px;color:var(--text-3)">${window.STORE.formatPrice(p.price)}</div>

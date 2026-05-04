@@ -13,6 +13,7 @@ window.STORE = {
       subcategory: "t-shirts",
       price: 89,
       emoji: "👕",
+      image: "img/product-placeholder.png",
       badge: "new",
       desc: "Premium 100% cotton. Breathable and perfect for everyday wear.",
       tags: ["casual", "cotton", "top"]
@@ -25,6 +26,7 @@ window.STORE = {
       price: 299,
       originalPrice: 350,
       emoji: "🧥",
+      image: "img/product-placeholder.png",
       badge: "sale",
       desc: "Timeless denim jacket with a rugged vintage wash.",
       tags: ["denim", "jacket", "vintage"]
@@ -36,6 +38,7 @@ window.STORE = {
       subcategory: "casual-dresses",
       price: 159,
       emoji: "👗",
+      image: "img/product-placeholder.png",
       badge: "new",
       desc: "Light and breezy. Perfect for warm summer days.",
       tags: ["floral", "dress", "summer"]
@@ -47,6 +50,7 @@ window.STORE = {
       subcategory: "jeans",
       price: 199,
       emoji: "👖",
+      image: "img/product-placeholder.png",
       desc: "Stretch denim for all-day comfort. Classic straight fit.",
       tags: ["jeans", "denim", "bottoms"]
     },
@@ -57,6 +61,7 @@ window.STORE = {
       subcategory: "sneakers",
       price: 359,
       emoji: "👟",
+      image: "img/product-placeholder.png",
       badge: "new",
       desc: "Lightweight and responsive for your daily miles.",
       tags: ["shoes", "running", "athletic"]
@@ -68,6 +73,7 @@ window.STORE = {
       subcategory: "bags",
       price: 450,
       emoji: "🎒",
+      image: "img/product-placeholder.png",
       desc: "Premium leather. Spacious with dedicated laptop sleeve.",
       tags: ["bag", "leather", "backpack"]
     },
@@ -78,6 +84,7 @@ window.STORE = {
       subcategory: "sweaters",
       price: 229,
       emoji: "🧶",
+      image: "img/product-placeholder.png",
       desc: "Chunky knit sweater for chilly evenings.",
       tags: ["sweater", "knit", "warm"]
     },
@@ -88,6 +95,7 @@ window.STORE = {
       subcategory: "scarves",
       price: 89,
       emoji: "🧣",
+      image: "img/product-placeholder.png",
       desc: "100% silk. Adds a pop of color to any outfit.",
       tags: ["accessory", "silk", "scarf"]
     },
@@ -98,6 +106,7 @@ window.STORE = {
       subcategory: "pants",
       price: 179,
       emoji: "👖",
+      image: "img/product-placeholder.png",
       badge: "new",
       desc: "Durable and stylish with multiple pockets.",
       tags: ["pants", "cargo", "urban"]
@@ -109,6 +118,7 @@ window.STORE = {
       subcategory: "hats",
       price: 59,
       emoji: "🧢",
+      image: "img/product-placeholder.png",
       desc: "Cotton twill cap with adjustable strap.",
       tags: ["hat", "cap", "minimal"]
     },
@@ -119,6 +129,7 @@ window.STORE = {
       subcategory: "formal",
       price: 599,
       emoji: "💃",
+      image: "img/product-placeholder.png",
       desc: "Stunning silhouette for your most special occasions.",
       tags: ["dress", "formal", "elegant"]
     },
@@ -130,6 +141,7 @@ window.STORE = {
       price: 189,
       originalPrice: 220,
       emoji: "🧥",
+      image: "img/product-placeholder.png",
       badge: "sale",
       desc: "Soft fleece lining with unique street-style graphic.",
       tags: ["hoodie", "graphic", "streetwear"]
