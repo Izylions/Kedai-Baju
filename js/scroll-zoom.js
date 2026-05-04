@@ -1,70 +1,126 @@
 /* ================================================
-   js/scroll-zoom.js  — feature/ui-base (Now Slideshow)
-   Handles the hero slideshow functionality
+   js/scroll-zoom.js — Nike-style Hero Slideshow
+   Handles: auto-advance, pause/play, prev/next,
+   dots, counter, video playback, slide click-through
    ================================================ */
 
 window.SCROLL_ZOOM = (() => {
 
   function init() {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.getElementById('slidePrev');
-    const nextBtn = document.getElementById('slideNext');
-    
+    const slides    = document.querySelectorAll('.slide');
+    const dots      = document.querySelectorAll('.dot');
+    const prevBtn   = document.getElementById('slidePrev');
+    const nextBtn   = document.getElementById('slideNext');
+    const pauseBtn  = document.getElementById('slidePauseBtn');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const playIcon  = document.getElementById('playIcon');
+    const counter   = document.getElementById('slideCounter');
+
     if (!slides.length) return;
 
     let currentSlide = 0;
-    let slideInterval;
+    let slideInterval = null;
+    let isPaused = false;
+    const INTERVAL_MS = 5500;
 
+    /* ---- Navigate to slide ---- */
     function goToSlide(index) {
       slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      
-      currentSlide = (index + slides.length) % slides.length;
-      
+      if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+
+      // Pause video of previous slide
+      const prevVideo = slides[currentSlide].querySelector('.slide-video');
+      if (prevVideo) prevVideo.pause();
+
+      currentSlide = ((index % slides.length) + slides.length) % slides.length;
+
       slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
+      if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+
+      // Update counter
+      if (counter) counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+      // Play video of new slide if present
+      const nextVideo = slides[currentSlide].querySelector('.slide-video');
+      if (nextVideo) {
+        nextVideo.currentTime = 0;
+        nextVideo.play().catch(() => {});
+      }
     }
 
-    function nextSlide() {
-      goToSlide(currentSlide + 1);
-    }
+    /* ---- Click on a slide to navigate to its product page ---- */
+    slides.forEach(slide => {
+      slide.addEventListener('click', e => {
+        // Don't navigate if a CTA button was clicked (they handle their own link)
+        if (e.target.closest('.slide-ctas')) return;
+        const link = slide.getAttribute('data-link');
+        if (link) window.location.href = link;
+      });
+      slide.style.cursor = 'pointer';
+    });
 
-    function prevSlide() {
-      goToSlide(currentSlide - 1);
+    /* ---- Auto-advance ---- */
+    function start() {
+      if (slideInterval) return;
+      slideInterval = setInterval(() => goToSlide(currentSlide + 1), INTERVAL_MS);
     }
-
-    function startSlideshow() {
-      slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function resetSlideshow() {
+    function stop() {
       clearInterval(slideInterval);
-      startSlideshow();
+      slideInterval = null;
     }
+    function reset() { stop(); if (!isPaused) start(); }
 
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetSlideshow();
-      });
-      
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetSlideshow();
-      });
-    }
+    /* ---- Prev / Next ---- */
+    if (prevBtn) prevBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      goToSlide(currentSlide - 1);
+      reset();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      goToSlide(currentSlide + 1);
+      reset();
+    });
 
+    /* ---- Dots ---- */
     dots.forEach(dot => {
-      dot.addEventListener('click', () => {
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
         goToSlide(parseInt(dot.getAttribute('data-index')));
-        resetSlideshow();
+        reset();
       });
     });
 
-    startSlideshow();
+    /* ---- Pause / Play button ---- */
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        isPaused = !isPaused;
+        if (isPaused) {
+          stop();
+          if (pauseIcon) pauseIcon.style.display = 'none';
+          if (playIcon)  playIcon.style.display  = 'block';
+          pauseBtn.setAttribute('aria-label', 'Play slideshow');
+        } else {
+          start();
+          if (pauseIcon) pauseIcon.style.display = 'block';
+          if (playIcon)  playIcon.style.display  = 'none';
+          pauseBtn.setAttribute('aria-label', 'Pause slideshow');
+        }
+      });
+    }
+
+    /* ---- Keyboard navigation ---- */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { goToSlide(currentSlide - 1); reset(); }
+      if (e.key === 'ArrowRight') { goToSlide(currentSlide + 1); reset(); }
+    });
+
+    /* ---- Start ---- */
+    start();
   }
 
+  /* ---- Card reveal on scroll ---- */
   function initCardReveal() {
     const cards = document.querySelectorAll('.product-card, .cat-card, .promo-banner');
     if (!cards.length) return;

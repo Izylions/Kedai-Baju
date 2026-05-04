@@ -140,7 +140,10 @@ window.CART = (() => {
 
     checkoutBtn && checkoutBtn.addEventListener('click', () => {
       if (count() === 0) { window.showToast('Your cart is empty!'); return; }
-      window.showToast('Proceeding to checkout… (demo)');
+      
+      // Determine base path for linking depending on whether we're on index or products page
+      const inPagesFolder = window.location.pathname.includes('/pages/');
+      window.location.href = inPagesFolder ? 'checkout.html' : 'pages/checkout.html';
     });
 
     /* Delegated events inside sidebar */

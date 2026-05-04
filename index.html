@@ -86,54 +86,87 @@
     </div>
   </nav>
 
-  <!-- ===== HERO SLIDESHOW ===== -->
-  <section class="hero-slideshow">
+  <!-- ===== HERO SLIDESHOW (Nike-style) ===== -->
+  <section class="hero-slideshow" id="heroSlideshow">
     <div class="slides-container" id="heroSlidesContainer">
-      
-      <!-- Slide 1 -->
-      <div class="slide active" onclick="window.location.href='pages/products.html?cat=tops'" style="cursor: pointer;">
-        <div class="slide-bg" style="background: url('img/hero.png') no-repeat center center/cover;"></div>
+
+      <!-- Slide 1: Image — Summer Collection → Tops -->
+      <div class="slide active" data-link="pages/products.html?cat=tops">
+        <div class="slide-bg" style="background: url('img/hero.png') center center/cover no-repeat;"></div>
         <div class="slide-content">
           <p class="slide-eyebrow">New Arrival</p>
-          <h1 class="slide-title">Summer Collection</h1>
+          <h1 class="slide-title">Summer<br>Collection</h1>
           <p class="slide-subtitle">Vibrant, breathable, and unmistakably you.</p>
-          <a href="pages/products.html?cat=tops" class="btn-primary">Shop Now</a>
+          <div class="slide-ctas">
+            <a href="pages/products.html?cat=tops" class="slide-cta-shop">Shop Collection</a>
+          </div>
         </div>
       </div>
-      
-      <!-- Slide 2 -->
-      <div class="slide" onclick="window.location.href='pages/products.html?cat=outerwear'" style="cursor: pointer;">
-        <div class="slide-bg" style="background: url('img/hero2.png') no-repeat center center/cover;"></div>
+
+      <!-- Slide 2: Video — Urban Edge → Outerwear -->
+      <div class="slide" data-link="pages/products.html?cat=outerwear">
+        <!-- Fallback image shown while video loads or if no video file -->
+        <div class="slide-bg" style="background: url('img/hero2.png') center center/cover no-repeat;"></div>
+        <!-- Uncomment and set src when you have a video file:
+        <video class="slide-video" id="slideVideo2" loop muted playsinline preload="none"
+               poster="img/hero2.png">
+          <source src="img/promo-video.mp4" type="video/mp4">
+        </video>
+        -->
         <div class="slide-content">
           <p class="slide-eyebrow">Streetwear</p>
-          <h1 class="slide-title">Urban Edge</h1>
+          <h1 class="slide-title">Urban<br>Edge</h1>
           <p class="slide-subtitle">Elevate your street style with our new denim lineup.</p>
-          <a href="pages/products.html?cat=outerwear" class="btn-primary">Shop Denim</a>
+          <div class="slide-ctas">
+            <a href="pages/products.html?cat=outerwear" class="slide-cta-shop">Shop Outerwear</a>
+            <button class="slide-cta-play" onclick="window.location.href='pages/products.html?cat=outerwear'">
+              <span class="play-icon">
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="#111"><polygon points="0,0 10,6 0,12"/></svg>
+              </span>
+              Watch Film
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Slide 3 -->
-      <div class="slide" onclick="window.location.href='pages/products.html?cat=dresses'" style="cursor: pointer;">
-        <div class="slide-bg" style="background: url('img/hero3.png') no-repeat center center/cover;"></div>
+      <!-- Slide 3: Image — Evening Elegance → Dresses -->
+      <div class="slide" data-link="pages/products.html?cat=dresses">
+        <div class="slide-bg" style="background: url('img/hero3.png') center center/cover no-repeat;"></div>
         <div class="slide-content">
           <p class="slide-eyebrow">Exclusive</p>
-          <h1 class="slide-title">Evening Elegance</h1>
+          <h1 class="slide-title">Evening<br>Elegance</h1>
           <p class="slide-subtitle">Make an entrance. Stand out effortlessly.</p>
-          <a href="pages/products.html?cat=dresses" class="btn-primary">Shop Dresses</a>
+          <div class="slide-ctas">
+            <a href="pages/products.html?cat=dresses" class="slide-cta-shop">Shop Dresses</a>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Slideshow Controls -->
-    <button class="slide-btn prev" id="slidePrev">❮</button>
-    <button class="slide-btn next" id="slideNext">❯</button>
-    <div class="slide-dots" id="slideDots">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
+    <!-- Prev / Next arrows -->
+    <button class="slide-btn prev" id="slidePrev" aria-label="Previous slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="slide-btn next" id="slideNext" aria-label="Next slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <!-- Bottom controls: pause + dots + counter -->
+    <div class="hero-controls">
+      <button class="pause-btn" id="slidePauseBtn" aria-label="Pause slideshow">
+        <svg id="pauseIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="playIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="5,3 19,12 5,21"/></svg>
+      </button>
+      <div class="slide-dots" id="slideDots">
+        <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+        <button class="dot" data-index="1" aria-label="Slide 2"></button>
+        <button class="dot" data-index="2" aria-label="Slide 3"></button>
+      </div>
+      <span class="slide-counter" id="slideCounter">1 / 3</span>
     </div>
   </section>
+
 
   <!-- ===== FEATURED PRODUCTS (feature/ui-base + feature/cart + feature/wishlist) ===== -->
   <section class="featured-section" id="featured">

@@ -148,7 +148,7 @@
 .product-actions .btn-primary { flex: 1; font-size: 13px; padding: 10px 16px; }
 
 /* ---------- Products Page ---------- */
-.products-page { padding-top: 100px; min-height: 100vh; }
+.products-page { padding-top: 80px; min-height: 100vh; }
 .products-page-header { padding: 40px 5% 32px; }
 .products-page-header h1 { font-size: clamp(2rem, 5vw, 4rem); }
 .products-page-header p { color: var(--text-2); margin-top: 8px; }
