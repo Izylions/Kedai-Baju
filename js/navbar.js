@@ -27,59 +27,52 @@ window.NAVBAR = (() => {
       });
     }
 
-    /* ---- Search overlay ---- */
-    if (!document.getElementById('searchOverlay')) {
-      const el = document.createElement('div');
-      el.className = 'search-overlay';
-      el.id = 'searchOverlay';
-      el.innerHTML = `
-        <div class="search-input-wrap">
-          <input type="text" id="searchInput" placeholder="Search products…" autocomplete="off"/>
-          <button class="search-close-btn" id="searchCloseBtn">✕</button>
-        </div>
-        <div class="search-results" id="searchResultsContainer"></div>
-      `;
-      document.body.appendChild(el);
-    }
-
+    /* ---- Inline Search ---- */
     const searchBtn     = document.getElementById('searchBtn');
-    const searchOverlay = document.getElementById('searchOverlay');
-    const searchClose   = document.getElementById('searchCloseBtn');
-    const searchInput   = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResultsContainer');
+    const searchContainer = document.getElementById('inlineSearchContainer');
+    const searchInput   = document.getElementById('inlineSearchInput');
+    const searchResults = document.getElementById('inlineSearchResults');
 
-    if (searchBtn && searchOverlay) {
-      searchBtn.addEventListener('click', () => {
-        searchOverlay.classList.add('active');
-        setTimeout(() => searchInput && searchInput.focus(), 50);
+    if (searchBtn && searchContainer && searchInput) {
+      searchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchContainer.classList.toggle('active');
+        if (searchContainer.classList.contains('active')) {
+          setTimeout(() => searchInput.focus(), 50);
+        } else {
+          closeSearch();
+        }
       });
-      searchClose && searchClose.addEventListener('click', closeSearch);
-      searchOverlay.addEventListener('click', e => {
-        if (e.target === searchOverlay) closeSearch();
+      
+      document.addEventListener('click', e => {
+        if (!searchContainer.contains(e.target)) {
+          closeSearch();
+        }
       });
+      
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeSearch();
       });
 
-      searchInput && searchInput.addEventListener('input', e => {
+      searchInput.addEventListener('input', e => {
         const q = e.target.value.trim();
         if (!q || q.length < 2) { searchResults.innerHTML = ''; return; }
         const results = window.STORE.search(q).slice(0, 6);
         searchResults.innerHTML = results.length
           ? results.map(p => `
               <div class="search-result-item" data-id="${p.id}" style="
-                display:flex;gap:14px;align-items:center;
-                padding:12px;border-radius:10px;cursor:pointer;
+                display:flex;gap:12px;align-items:center;
+                padding:10px;border-radius:8px;cursor:pointer;
                 transition:background .15s;
               " onmouseover="this.style.background='rgba(0,0,0,0.04)'"
                  onmouseout="this.style.background=''">
-                <img src="${p.image}" alt="${p.name}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--border)">
+                <img src="${p.image}" alt="${p.name}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;border:1px solid var(--border)">
                 <div>
-                  <div style="font-size:15px;color:var(--text-1);font-weight:500">${p.name}</div>
-                  <div style="font-size:13px;color:var(--text-3)">${window.STORE.formatPrice(p.price)}</div>
+                  <div style="font-size:14px;color:var(--text-1);font-weight:500">${p.name}</div>
+                  <div style="font-size:12px;color:var(--text-3)">${window.STORE.formatPrice(p.price)}</div>
                 </div>
               </div>`).join('')
-          : `<p style="color:var(--text-3);text-align:center;padding:24px 0">No results for "${q}"</p>`;
+          : `<p style="color:var(--text-3);text-align:center;padding:16px 0;font-size:13px;">No results for "${q}"</p>`;
 
         searchResults.querySelectorAll('[data-id]').forEach(el => {
           el.addEventListener('click', () => {
@@ -92,7 +85,7 @@ window.NAVBAR = (() => {
     }
 
     function closeSearch() {
-      if (searchOverlay) searchOverlay.classList.remove('active');
+      if (searchContainer) searchContainer.classList.remove('active');
       if (searchInput)   searchInput.value = '';
       if (searchResults) searchResults.innerHTML = '';
     }
