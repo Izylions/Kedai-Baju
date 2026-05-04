@@ -6,26 +6,26 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-  --bg:         #000000;
-  --bg-2:       #0a0a0a;
-  --bg-3:       #111111;
-  --bg-4:       #1c1c1e;
-  --surface:    #1c1c1e;
-  --border:     rgba(255,255,255,0.08);
-  --border-md:  rgba(255,255,255,0.14);
-  --text-1:     #f5f5f7;
-  --text-2:     #a1a1a6;
-  --text-3:     #6e6e73;
+  --bg:         #ffffff;
+  --bg-2:       #f5f5f7;
+  --bg-3:       #ebebeb;
+  --bg-4:       #e0e0e0;
+  --surface:    #ffffff;
+  --border:     rgba(0,0,0,0.08);
+  --border-md:  rgba(0,0,0,0.14);
+  --text-1:     #1d1d1f;
+  --text-2:     #424245;
+  --text-3:     #86868b;
   --accent:     #ff3366;
   --accent-2:   #5ac8fa;
-  --accent-glow: rgba(255,51,102,0.35);
+  --accent-glow: rgba(255,51,102,0.25);
   --radius-sm:  8px;
   --radius-md:  14px;
   --radius-lg:  20px;
   --radius-xl:  28px;
-  --shadow-sm:  0 2px 12px rgba(0,0,0,0.4);
-  --shadow-md:  0 8px 32px rgba(0,0,0,0.6);
-  --shadow-lg:  0 20px 60px rgba(0,0,0,0.8);
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md:  0 8px 32px rgba(0,0,0,0.1);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.15);
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-body:    'DM Sans', sans-serif;
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,7 +66,7 @@ p  { color: var(--text-2); }
   gap: 8px;
   padding: 13px 28px;
   background: var(--accent);
-  color: #000;
+  color: #fff;
   border-radius: 980px;
   font-size: 15px;
   font-weight: 500;
@@ -74,7 +74,7 @@ p  { color: var(--text-2); }
   transition: all 0.25s var(--ease-smooth);
   white-space: nowrap;
 }
-.btn-primary:hover { background: #d0d0d5; transform: scale(1.02); }
+.btn-primary:hover { background: #e62254; transform: scale(1.02); }
 .btn-primary:active { transform: scale(0.98); }
 .btn-primary.full-width { width: 100%; }
 
@@ -106,7 +106,7 @@ p  { color: var(--text-2); }
   font-weight: 500;
   transition: all 0.2s var(--ease-smooth);
 }
-.btn-secondary:hover { background: var(--surface); border-color: rgba(255,255,255,0.25); }
+.btn-secondary:hover { background: var(--surface); border-color: rgba(0,0,0,0.25); }
 
 /* ---------- Section Headers ---------- */
 .section-header {
